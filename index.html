@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Kind of Marketer Are You? | MarkProf MP23</title>
+<meta name="description" content="Take the MarkProf Archetype Quiz and discover what kind of marketer you are. Are you a Storyteller, Strategist, Disruptor, Connector, Creator, or Analyst?">
+<meta property="og:title" content="What Kind of Marketer Are You? | MarkProf MP23">
+<meta property="og:description" content="Take the quiz and discover your marketing archetype.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#0A0A0A;color:#FFF;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(10,10,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-logo{font-size:0.85rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#FFF;text-decoration:none}
+.nav-right a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.8rem;font-weight:600;transition:color 0.2s}
+.nav-right a:hover{color:#FFF}
+
+/* SCREEN SYSTEM */
+.screen{display:none;min-height:100vh}
+.screen.active{display:flex;flex-direction:column}
+
+/* WELCOME */
+#welcome{align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;background:radial-gradient(ellipse at 50% 0%,rgba(123,47,190,0.25) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(255,107,107,0.15) 0%,transparent 50%),#0A0A0A}
+.welcome-badge{display:inline-block;padding:0.4rem 1.2rem;border:1px solid rgba(255,255,255,0.2);border-radius:100px;font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:2rem}
+.welcome-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,8vw,5rem);font-weight:700;line-height:1.05;margin-bottom:1.5rem;background:linear-gradient(135deg,#FFF 0%,#FF6B6B 50%,#7B2FBE 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.welcome-sub{font-size:clamp(1rem,2.5vw,1.25rem);color:rgba(255,255,255,0.6);max-width:500px;line-height:1.6;margin-bottom:3rem}
+.btn-start{display:inline-flex;align-items:center;gap:0.75rem;padding:1rem 2.5rem;background:#FFF;color:#0A0A0A;font-family:'Inter',sans-serif;font-size:1.1rem;font-weight:700;border:none;border-radius:100px;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,0.2)}
+.btn-start .arrow{font-size:1.3rem;transition:transform 0.2s}
+.btn-start:hover .arrow{transform:translateX(4px)}
+.welcome-meta{margin-top:2.5rem;display:flex;gap:2rem;color:rgba(255,255,255,0.4);font-size:0.85rem}
+.welcome-powered{margin-top:3rem;font-size:0.75rem;color:rgba(255,255,255,0.25)}
+.welcome-powered a{color:rgba(255,255,255,0.4);text-decoration:underline}
+
+/* QUIZ */
+#quiz{align-items:center;padding:0;background:#0A0A0A}
+.quiz-progress{position:fixed;top:57px;left:0;height:3px;background:linear-gradient(90deg,#FF6B6B,#7B2FBE);transition:width 0.4s cubic-bezier(0.4,0,0.2,1);z-index:100;border-radius:0 2px 2px 0}
+.quiz-status{text-align:center;padding:5rem 2rem 0;font-size:0.8rem;font-weight:600;color:rgba(255,255,255,0.4)}
+.quiz-status span{color:#FFF}
+.q-wrap{width:100%;max-width:680px;padding:2rem 2rem 4rem;margin:0 auto}
+.q-label{font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem}
+.q-text{font-size:clamp(1.3rem,3.5vw,1.75rem);font-weight:700;line-height:1.35;margin-bottom:2rem}
+.opts{display:flex;flex-direction:column;gap:0.65rem}
+.opt{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;color:#FFF;font-family:'Inter',sans-serif;font-size:0.92rem;line-height:1.5;text-align:left;cursor:pointer;width:100%;transition:all 0.2s}
+.opt:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);transform:translateX(4px)}
+.opt.sel{background:rgba(123,47,190,0.15);border-color:rgba(123,47,190,0.5)}
+.opt-key{display:flex;align-items:center;justify-content:center;width:26px;height:26px;min-width:26px;border-radius:8px;background:rgba(255,255,255,0.1);font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.5);margin-top:2px}
+.opt.sel .opt-key{background:#7B2FBE;color:#FFF}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.06)}
+.btn-q{padding:0.65rem 1.4rem;background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:100px;color:rgba(255,255,255,0.6);font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.btn-q:hover{border-color:rgba(255,255,255,0.4);color:#FFF}
+.btn-q:disabled{opacity:0.2;cursor:not-allowed}
+.btn-q.pri{background:#FFF;color:#0A0A0A;border-color:#FFF}
+.btn-q.pri:disabled{opacity:0.3}
+
+/* EMAIL GATE */
+#email-gate{align-items:center;justify-content:center;text-align:center;padding:2rem;background:radial-gradient(ellipse at 50% 50%,rgba(123,47,190,0.15) 0%,transparent 60%),#0A0A0A}
+.lock-icon{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 2rem}
+#email-gate h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,5vw,2.5rem);font-weight:700;margin-bottom:0.6rem}
+#email-gate .sub{color:rgba(255,255,255,0.5);margin-bottom:2.5rem}
+.e-form{display:flex;flex-direction:column;gap:0.8rem;width:100%;max-width:380px}
+.e-in{padding:0.9rem 1.2rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#FFF;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.2s}
+.e-in::placeholder{color:rgba(255,255,255,0.3)}
+.e-in:focus{border-color:rgba(123,47,190,0.6)}
+.btn-unlock{padding:0.9rem;background:#FFF;color:#0A0A0A;font-family:'Inter',sans-serif;font-size:1rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+.btn-unlock:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,0.2)}
+.e-privacy{margin-top:0.8rem;font-size:0.72rem;color:rgba(255,255,255,0.3)}
+
+/* RESULTS */
+#results{padding:0}
+.res-hero{min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;position:relative;overflow:hidden}
+.res-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,0.08) 0%,transparent 60%);pointer-events:none}
+.res-badge{display:inline-block;padding:0.4rem 1.2rem;border:1px solid rgba(255,255,255,0.25);border-radius:100px;font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fu 0.6s 0.2s forwards}
+.res-icon{width:120px;height:120px;margin-bottom:1.5rem;opacity:0;animation:fu 0.6s 0.25s forwards}
+.res-icon svg{width:100%;height:100%}
+.res-name-greeting{font-size:clamp(1rem,3vw,1.4rem);font-weight:500;opacity:0.8;margin-bottom:0.5rem;opacity:0;animation:fu 0.6s 0.3s forwards}
+.res-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,10vw,5.5rem);font-weight:700;line-height:1;margin-bottom:0.75rem;opacity:0;animation:fu 0.6s 0.4s forwards}
+.res-tagline{font-size:clamp(1rem,2.5vw,1.25rem);font-style:italic;max-width:550px;line-height:1.5;opacity:0;animation:fu 0.6s 0.6s forwards}
+.combo-badge{display:inline-block;margin-top:0.75rem;padding:0.35rem 1rem;border-radius:100px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);font-size:0.78rem;font-weight:600;opacity:0;animation:fu 0.6s 0.8s forwards}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.res-body{max-width:650px;margin:0 auto;padding:2.5rem 2rem 3rem}
+.res-sec{margin-bottom:2.5rem}
+.res-lbl{font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.8rem}
+.res-traits{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:2rem}
+.res-trait{padding:0.45rem 1.1rem;border-radius:100px;font-size:0.82rem;font-weight:600;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1)}
+.res-desc{font-size:1.05rem;line-height:1.7;color:rgba(255,255,255,0.75)}
+.res-careers{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.res-careers li{padding:0.8rem 1.1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;font-size:0.9rem;color:rgba(255,255,255,0.7)}
+.res-famous{color:rgba(255,255,255,0.6);font-size:0.92rem;line-height:1.7}
+.res-funfact{padding:1.25rem;background:rgba(255,255,255,0.04);border-radius:14px;border:1px solid rgba(255,255,255,0.08);font-size:0.92rem;color:rgba(255,255,255,0.65);line-height:1.6;font-style:italic}
+
+/* SHARE */
+.share-bar{padding:2.5rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.06)}
+.share-bar h3{font-size:1.2rem;font-weight:700;margin-bottom:0.4rem}
+.share-bar>p{color:rgba(255,255,255,0.45);font-size:0.85rem;margin-bottom:1.5rem}
+.share-btns{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.25rem}
+.btn-sh{padding:0.6rem 1.3rem;border-radius:100px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#FFF;font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.btn-sh:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3)}
+.btn-dl{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2rem;background:#FFF;color:#0A0A0A;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s}
+.btn-dl:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,0.2)}
+
+/* CTA SECTION */
+.cta-section{padding:4rem 2rem;background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.06)}
+.cta-section h3{text-align:center;font-size:1.4rem;font-weight:700;margin-bottom:0.5rem}
+.cta-section>p{text-align:center;color:rgba(255,255,255,0.5);margin-bottom:2.5rem;font-size:0.95rem}
+.cta-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;max-width:900px;margin:0 auto}
+.cta-card{padding:2rem;border-radius:20px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);text-align:center;transition:all 0.25s;position:relative;overflow:hidden}
+.cta-card:hover{border-color:rgba(255,255,255,0.15);transform:translateY(-4px)}
+.cta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:20px 20px 0 0}
+.cta-card.t1::before{background:linear-gradient(90deg,#FF6B6B,#FF8E53)}
+.cta-card.t2::before{background:linear-gradient(90deg,#7B2FBE,#A855F7)}
+.cta-card.t3::before{background:linear-gradient(90deg,#008080,#38B2AC)}
+.cta-card h4{font-size:1.1rem;font-weight:700;margin-bottom:0.5rem}
+.cta-card p{font-size:0.85rem;color:rgba(255,255,255,0.5);margin-bottom:1.5rem;line-height:1.5}
+.btn-cta{display:inline-block;padding:0.75rem 2rem;border-radius:100px;font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:700;text-decoration:none;transition:all 0.2s;cursor:pointer;border:none}
+.btn-cta:hover{transform:translateY(-2px)}
+.btn-cta.primary{background:#FF6B6B;color:#FFF}
+.btn-cta.secondary{background:transparent;color:#FFF;border:1px solid rgba(255,255,255,0.2)}
+
+/* FOOTER */
+.footer{padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,0.06)}
+.footer-links{display:flex;gap:2rem;justify-content:center;margin-bottom:1rem}
+.footer-links a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.82rem;font-weight:500;transition:color 0.2s}
+.footer-links a:hover{color:#FFF}
+.footer-copy{font-size:0.72rem;color:rgba(255,255,255,0.2)}
+
+/* CANVAS */
+#card-canvas{display:none}
+
+/* RESPONSIVE */
+@media(max-width:640px){.welcome-meta{flex-direction:column;gap:0.5rem}.cta-cards{grid-template-columns:1fr}.share-btns{flex-direction:column;align-items:center}.q-wrap{padding:2rem 1.25rem 3rem}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="https://markprof.org" class="nav-logo" target="_blank">MarkProf</a>
+  <div class="nav-right">
+    <a href="https://markprof.org" target="_blank">markprof.org</a>
+  </div>
+</nav>
+
+<!-- WELCOME -->
+<div id="welcome" class="screen active">
+  <div class="welcome-badge">MarkProf MP23</div>
+  <h1 class="welcome-title">What Kind of Marketer Are You?</h1>
+  <p class="welcome-sub">Answer 10 quick questions and discover your marketing archetype. Are you a Storyteller? A Strategist? A Disruptor? Find out &mdash; and get a shareable card to show your friends.</p>
+  <button class="btn-start" onclick="startQuiz()">Take the Quiz <span class="arrow">&rarr;</span></button>
+  <div class="welcome-meta"><span>10 questions</span><span>~3 minutes</span><span>6 archetypes</span></div>
+  <p class="welcome-powered">A project of <a href="https://markprof.org" target="_blank">MarkProf Foundation</a></p>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="screen">
+  <div class="quiz-progress" id="progBar" style="width:0%"></div>
+  <div class="quiz-status">Question <span id="curQ">1</span> of 10</div>
+  <div class="q-wrap" id="qWrap"></div>
+</div>
+
+<!-- EMAIL GATE -->
+<div id="email-gate" class="screen">
+  <div class="lock-icon">&#127919;</div>
+  <h2>Your result is ready!</h2>
+  <p class="sub">Enter your name and email to unlock your Marketer Archetype card.</p>
+  <form class="e-form" onsubmit="unlock(event)">
+    <input type="text" class="e-in" id="inName" placeholder="Your first name" required>
+    <input type="email" class="e-in" id="inEmail" placeholder="Your email address" required>
+    <button type="submit" class="btn-unlock">Unlock My Result</button>
+  </form>
+  <p class="e-privacy">We'll never spam you. Your data stays with MarkProf.</p>
+</div>
+
+<!-- RESULTS -->
+<div id="results" class="screen">
+  <div class="res-hero" id="resHero">
+    <div class="res-badge">YOUR MARKETER ARCHETYPE</div>
+    <div class="res-icon" id="resIcon"></div>
+    <div class="res-name-greeting" id="resGreeting"></div>
+    <div class="res-name" id="resName"></div>
+    <div class="res-tagline" id="resTagline"></div>
+    <div class="combo-badge" id="comboBadge" style="display:none"></div>
+  </div>
+  <div class="res-body">
+    <div class="res-traits" id="resTraits"></div>
+    <div class="res-sec"><div class="res-lbl">About You</div><p class="res-desc" id="resDesc"></p></div>
+    <div class="res-sec"><div class="res-lbl">Your Marketing Career Path</div><ul class="res-careers" id="resCareers"></ul></div>
+    <div class="res-sec"><div class="res-lbl">Famous Marketers Like You</div><p class="res-famous" id="resFamous"></p></div>
+    <div class="res-sec"><div class="res-funfact" id="resFun"></div></div>
+    <div class="res-sec" style="text-align:center;padding:1.5rem;background:linear-gradient(135deg,rgba(255,107,107,0.08),rgba(123,47,190,0.08));border:1px solid rgba(255,255,255,0.1);border-radius:16px">
+      <p style="font-size:1.05rem;font-weight:700;margin-bottom:0.5rem">Ready to turn this into a career?</p>
+      <p style="font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:1.25rem">MarkProf MP23 is a free, two-week marketing bootcamp with the Philippines' top CMOs. <span id="resHookInline" style="color:rgba(255,255,255,0.75)"></span></p>
+      <a href="https://markprof.org/apply" target="_blank" style="display:inline-block;padding:0.75rem 2rem;background:#FF6B6B;color:#FFF;font-family:Inter,sans-serif;font-size:0.9rem;font-weight:700;border-radius:100px;text-decoration:none;transition:transform 0.2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Apply for MP23</a>
+    </div>
+  </div>
+  <div class="share-bar">
+    <h3>Share Your Result</h3>
+    <p>Let your friends know what kind of marketer you are</p>
+    <div class="share-btns">
+      <button class="btn-sh" onclick="shareIG()">Instagram Story</button>
+      <button class="btn-sh" onclick="shareFB()">Facebook</button>
+      <button class="btn-sh" onclick="shareTW()">Twitter / X</button>
+      <button class="btn-sh" onclick="copyLink()">Copy Link</button>
+    </div>
+    <button class="btn-dl" onclick="downloadCard()">&#11015; Download Your Archetype Card</button>
+  </div>
+
+  <!-- ACTION ITEMS / CTAs -->
+  <div class="cta-section">
+    <h3>What's your next step?</h3>
+    <p>Your marketing journey continues here.</p>
+    <div class="cta-cards">
+      <div class="cta-card t1">
+        <h4>Apply for MP23</h4>
+        <p>Graduating in 2027 or 2028? Join the Philippines' premier marketing bootcamp. Completely free.</p>
+        <a href="https://markprof.org/apply" target="_blank" class="btn-cta primary">Apply Now</a>
+      </div>
+      <div class="cta-card t2">
+        <h4>Not Yet Eligible?</h4>
+        <p>Still in college? Get first access to MP24 and monthly marketing career content.</p>
+        <a href="https://markprof.org/waitlist" target="_blank" class="btn-cta secondary">Join MP24 Waitlist</a>
+      </div>
+      <div class="cta-card t3">
+        <h4>Support MarkProf</h4>
+        <p>Alumni, professional, professor, or parent? Help us find the next generation of marketers.</p>
+        <a href="https://markprof.org/support" target="_blank" class="btn-cta secondary">Become a Supporter</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="https://markprof.org/about" target="_blank">About MarkProf</a>
+      <a href="https://markprof.org/faq" target="_blank">FAQ</a>
+      <a href="https://markprof.org/contact" target="_blank">Contact</a>
+      <a href="https://markprof.org" target="_blank">markprof.org</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 MarkProf Foundation. All rights reserved.</p>
+    <p style="margin-top:1rem"><button onclick="retake()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.4);font-family:Inter,sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.5rem;border-radius:100px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='#FFF'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.4)'">Retake the Quiz</button></p>
+  </footer>
+</div>
+
+<canvas id="card-canvas" width="1080" height="1920"></canvas>
+
+<script>
+// ===================== DATA =====================
+// Isometric SVG icons — consistent geometric style across all 6
+const ICONS = {
+  // Storyteller: Open book with emanating lines (narrative/story)
+  ST: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.9"><path d="M60 30L20 50v40l40-20 40 20V50L60 30z" fill="currentColor" fill-opacity="0.12" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M60 30v60" stroke="currentColor" stroke-width="2.5"/><path d="M34 58l-6-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/><path d="M34 68l-6-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/><path d="M34 78l-6-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/><path d="M86 58l6-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/><path d="M86 68l6-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/><path d="M86 78l6-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/><circle cx="60" cy="22" r="4" fill="currentColor" fill-opacity="0.3"/></g></svg>`,
+  // Strategist: Chess piece / crown on isometric platform
+  SR: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.9"><path d="M30 75l30 15 30-15v10L60 100 30 85V75z" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M30 75l30 15 30-15" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M60 90V55" stroke="currentColor" stroke-width="2.5"/><path d="M45 55h30" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M48 55V40l12 10 12-10v15" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="48" cy="37" r="3" fill="currentColor" fill-opacity="0.4"/><circle cx="60" cy="47" r="3" fill="currentColor" fill-opacity="0.4"/><circle cx="72" cy="37" r="3" fill="currentColor" fill-opacity="0.4"/></g></svg>`,
+  // Disruptor: Lightning bolt through isometric cube
+  DS: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.9"><path d="M40 45l20-10 20 10v30L60 85 40 75V45z" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M60 35v50" stroke="currentColor" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.3"/><path d="M40 45l20 10 20-10" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M60 55v30" stroke="currentColor" stroke-width="2.5" opacity="0.3"/><path d="M65 25L55 52h14L53 90" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></g></svg>`,
+  // Connector: Network nodes with connecting lines
+  CN: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.9"><circle cx="60" cy="55" r="10" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="2.5"/><circle cx="30" cy="40" r="7" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><circle cx="90" cy="40" r="7" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="80" r="7" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><circle cx="85" cy="80" r="7" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2"/><path d="M51 49l-14-5M69 49l14-5M52 62l-11 13M68 62l11 13M37 45l-2 28M83 45l2 28" stroke="currentColor" stroke-width="1.5" opacity="0.4"/><circle cx="60" cy="55" r="4" fill="currentColor" fill-opacity="0.4"/></g></svg>`,
+  // Creator: Paintbrush on isometric canvas/diamond
+  CR: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.9"><path d="M60 30L25 55l35 25 35-25L60 30z" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M40 50l8 6 7-5 8 6 7-5 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/><path d="M82 32L62 68" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M62 68l-4 8c-1 2 1 4 3 3l7-5L62 68z" fill="currentColor" fill-opacity="0.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="86" cy="28" r="5" fill="currentColor" fill-opacity="0.25" stroke="currentColor" stroke-width="2"/></g></svg>`,
+  // Analyst: Bar chart on isometric platform
+  AN: `<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.9"><path d="M25 80l35 15 35-15" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M25 80v-5l35 15v5L25 80z" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M95 80v-5L60 90v5l35-15z" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="38" y="50" width="10" height="28" rx="2" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="2"/><rect x="55" y="35" width="10" height="43" rx="2" fill="currentColor" fill-opacity="0.25" stroke="currentColor" stroke-width="2"/><rect x="72" y="45" width="10" height="33" rx="2" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="2"/><path d="M35 55l15-12 15 8 15-15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><circle cx="80" cy="36" r="3" fill="currentColor" fill-opacity="0.5"/></g></svg>`
+};
+
+const ARCH = {
+  ST:{name:'The Storyteller',tagline:'You don\'t sell products \u2014 you make people feel something.',traits:['Intuitive','Emotional','Compelling'],desc:'You have a rare gift: you make people care. In a world drowning in content, you\'re the one who cuts through the noise with stories that stick. The brands that win aren\'t the loudest \u2014 they\'re the ones with the best storytellers. At MarkProf, you\'ll learn to channel this instinct into campaigns that move millions, mentored by the marketers behind the Philippines\' most iconic brand stories.',careers:['Brand Management','Copywriting & Content Strategy','Communications & PR'],famous:['The team behind Jollibee\'s viral "Vow" campaign','Nike\'s "Just Do It" \u2014 storytelling at its purest'],fun:'You\'re the friend who can make a 5-minute story about buying milk sound like a Netflix special.',hook:'MarkProf Storytellers go on to lead brand teams at companies like Unilever, P&G, and the country\'s most creative agencies.',bg:'#FF6B6B',tx:'#FFF5E1',ac:'#FFF5E1'},
+  SR:{name:'The Strategist',tagline:'You see the chessboard when everyone else sees checkers.',traits:['Analytical','Visionary','Structured'],desc:'You don\'t just have ideas \u2014 you have plans that actually work. Companies pay millions for the kind of thinking that comes naturally to you: seeing the big picture, connecting the dots, and building the roadmap from insight to execution. At MarkProf, you\'ll sharpen that strategic mind alongside CMOs who\'ve launched brands across Southeast Asia \u2014 and you\'ll build the network to fast-track your career.',careers:['Marketing Strategy & Planning','Management Consulting','Business Development'],famous:['P&G\'s brand management system \u2014 strategy built an empire','The team that turned Potato Corner into a global franchise'],fun:'You probably have a spreadsheet for your personal goals and you\'re not even embarrassed about it.',hook:'MarkProf Strategists have gone on to consulting firms, brand leadership roles, and founded their own companies.',bg:'#1B2A4A',tx:'#E8E8E8',ac:'#E8E8E8'},
+  DS:{name:'The Disruptor',tagline:'Rules exist so you know exactly what to break.',traits:['Bold','Original','Fearless'],desc:'While everyone else plays it safe, you\'re already three steps ahead with an idea nobody saw coming. The marketing industry doesn\'t need more people who follow templates \u2014 it needs originals like you who rewrite the rules entirely. At MarkProf, you\'ll be surrounded by the Philippines\' boldest marketing leaders who\'ll push your ideas further than you thought possible, and give you the frameworks to make wild ideas actually land.',careers:['Innovation & New Product Development','Startup Marketing / Growth Hacking','Creative Direction'],famous:['The Angkas team who turned regulatory battles into a beloved brand','Liquid Death \u2014 turning water into a punk rock brand'],fun:'Your org mates either love your ideas or are terrified by them. Usually both.',hook:'MarkProf Disruptors launch startups, lead innovation teams, and become the creative forces brands fight to hire.',bg:'#7B2FBE',tx:'#FFFFFF',ac:'#39FF14'},
+  CN:{name:'The Connector',tagline:'You don\'t build brands \u2014 you build communities.',traits:['Empathetic','Relational','Trustworthy'],desc:'In an age of algorithms, you bet on something more powerful: real human connection. You\'re the person who turns strangers into collaborators and customers into evangelists. That\'s not just a soft skill \u2014 it\'s the single most valuable capability in modern marketing. At MarkProf, you\'ll build relationships with 1,000+ alumni and the country\'s top marketing executives \u2014 a network that compounds for the rest of your career.',careers:['Sales & Trade Marketing','Community Management','Key Account Management','Customer Experience'],famous:['PICKUP COFFEE \u2014 built a brand through community, not ads','The MarkProf alumni network itself \u2014 connections that compound'],fun:'You know the name of your sari-sari store tita AND her kids\' birthdays.',hook:'MarkProf Connectors build the partnerships, teams, and communities that become the backbone of great brands.',bg:'#008080',tx:'#FFFFFF',ac:'#FFD700'},
+  CR:{name:'The Creator',tagline:'The world is your canvas and the brief is optional.',traits:['Visual','Imaginative','Expressive'],desc:'You see what others miss \u2014 the perfect color, the right frame, the detail that elevates good to unforgettable. Brands are desperate for people who can make them look and feel extraordinary. At MarkProf, you\'ll work alongside creative directors and brand builders who\'ve shaped the visual identities of the Philippines\' biggest companies \u2014 and you\'ll learn how to turn your creative instincts into a career that actually pays.',careers:['Creative / Art Direction','Digital & Social Media Marketing','Brand Design & Packaging','Content Creation'],famous:['Sunnies Studios \u2014 aesthetic IS strategy','The creatives behind Coca-Cola\'s timeless visual identity'],fun:'You\'ve redesigned your Canva resume at least 4 times this semester.',hook:'MarkProf Creators lead agency teams, define brand aesthetics, and build the visual worlds people fall in love with.',bg:'#FF1493',tx:'#1A1A1A',ac:'#FFFDD0'},
+  AN:{name:'The Analyst',tagline:'Behind every great campaign is someone who read the data.',traits:['Precise','Curious','Evidence-driven'],desc:'While everyone else goes with their gut, you go with the evidence \u2014 and you\'re almost always right. In today\'s marketing, data literacy isn\'t optional \u2014 it\'s the superpower that separates good marketers from great ones. At MarkProf, you\'ll learn how the country\'s leading brands turn consumer insights into winning strategies, and you\'ll gain the business acumen to pair your analytical mind with real-world impact.',careers:['Consumer Insights & Market Research','Marketing Analytics & Data Science','Performance Marketing / Digital Advertising','Revenue Management'],famous:['Netflix\'s recommendation algorithm team \u2014 data IS the product','Google Ads \u2014 where every click is measured'],fun:'You\'ve Googled "pivot table tutorial" more than once and you\'re proud of it.',hook:'MarkProf Analysts become the insight leaders and performance marketers that every modern brand needs.',bg:'#1B4332',tx:'#FFFFFF',ac:'#95D5B2'}
+};
+
+// QUESTIONS — options are PRE-SHUFFLED per question so no archetype sits in the same slot pattern
+const QS = [
+  // Q1: Order: CN, AN, CR, ST, DS, SR
+  {label:'The Group Project',text:'Your barkada is planning a surprise birthday party. What\'s your move?',opts:[
+    {t:'You\'re the one who rallied everyone together and made sure no one was left out',c:'CN'},
+    {t:'"Based on her recent IG stories, she\'s been craving Korean food \u2014 I made a reservation at her most-liked restaurant"',c:'AN'},
+    {t:'You\'re designing the invitation, choosing the theme colors, and curating the playlist mood',c:'CR'},
+    {t:'You write the invitation message that makes everyone cry-laugh',c:'ST'},
+    {t:'"Forget the restaurant, let\'s rent a projector and do it on a rooftop"',c:'DS'},
+    {t:'You create the full timeline \u2014 venue booking, food orders, playlist \u2014 everything mapped out',c:'SR'}
+  ]},
+  // Q2: Order: CR, DS, SR, AN, ST, CN
+  {label:'The Class Presentation',text:'You have a major presentation tomorrow. What are you most focused on?',opts:[
+    {t:'Your slides look like they came from a creative agency \u2014 the aesthetic IS the argument',c:'CR'},
+    {t:'You\'re ditching PowerPoint and doing something no one expects',c:'DS'},
+    {t:'Your slide structure is bulletproof \u2014 clear problem, framework, recommendation',c:'SR'},
+    {t:'Your data is airtight \u2014 you\'ve triple-checked every number and source',c:'AN'},
+    {t:'Making sure your delivery lands emotionally \u2014 you want the class to feel something',c:'ST'},
+    {t:'You\'ve already synced with every groupmate so everyone feels confident in their part',c:'CN'}
+  ]},
+  // Q3: Order: DS, ST, AN, CR, CN, SR
+  {label:'The Social Media Scroll',text:'You see a brand\'s viral campaign on TikTok. Your first thought is:',opts:[
+    {t:'"This is cool but I already have 3 ideas for how to do it better and weirder"',c:'DS'},
+    {t:'"The story they told was brilliant \u2014 I almost forgot it was an ad"',c:'ST'},
+    {t:'"I wonder what their conversion rate is and how much they spent on this"',c:'AN'},
+    {t:'"The visuals, the edit, the sound design \u2014 chef\'s kiss"',c:'CR'},
+    {t:'"Look at the comments section \u2014 they built a whole community around this"',c:'CN'},
+    {t:'"I can see exactly why this worked \u2014 the targeting, timing, and hook were all intentional"',c:'SR'}
+  ]},
+  // Q4: Order: SR, CN, ST, CR, AN, DS
+  {label:'The Internship',text:'You\'re picking an internship. Which one excites you most?',opts:[
+    {t:'A strategy or consulting team \u2014 you\'ll work on market entry plans and competitive analysis',c:'SR'},
+    {t:'A sales or trade marketing role \u2014 you\'ll be out in the field meeting retailers and distributors',c:'CN'},
+    {t:'A brand team working on a campaign launch \u2014 you\'ll help craft the messaging and story',c:'ST'},
+    {t:'A creative or digital agency \u2014 you\'ll be making content that people actually want to watch',c:'CR'},
+    {t:'A consumer insights or analytics team \u2014 you\'ll be turning data into "aha!" moments',c:'AN'},
+    {t:'A startup where your job title doesn\'t exist yet and you\'ll figure it out as you go',c:'DS'}
+  ]},
+  // Q5: Order: AN, CR, CN, DS, SR, ST
+  {label:'The Debate',text:'Your friend says: "Marketing is just manipulating people into buying things they don\'t need." You respond:',opts:[
+    {t:'"Let me show you the data on how the best brands actually grow \u2014 it\'s not what you think"',c:'AN'},
+    {t:'"Good marketing is art that earns attention \u2014 if it\'s manipulative, it\'s just bad marketing"',c:'CR'},
+    {t:'"Marketing is really about relationships \u2014 brands that last are the ones people trust"',c:'CN'},
+    {t:'"The best marketing doesn\'t convince \u2014 it challenges how people see the world"',c:'DS'},
+    {t:'"Actually, marketing is about solving real problems by understanding what people truly need"',c:'SR'},
+    {t:'"Marketing is storytelling \u2014 it connects people to things that genuinely improve their lives"',c:'ST'}
+  ]},
+  // Q6: Order: ST, AN, CN, SR, DS, CR
+  {label:'The Dream Project',text:'If you could work on any marketing project, you\'d choose:',opts:[
+    {t:'A documentary-style brand film that makes people rethink an entire category',c:'ST'},
+    {t:'Building a real-time marketing dashboard that predicts what consumers will want next',c:'AN'},
+    {t:'A grassroots community campaign that turns customers into brand advocates',c:'CN'},
+    {t:'A full go-to-market strategy for launching a product in a new country',c:'SR'},
+    {t:'A guerilla marketing stunt that goes viral and gets written about in the news',c:'DS'},
+    {t:'A complete brand identity redesign \u2014 logo, packaging, visual world, everything',c:'CR'}
+  ]},
+  // Q7: Order: CR, SR, CN, AN, ST, DS
+  {label:'The Superpower',text:'Your friends would say your superpower is:',opts:[
+    {t:'You have an eye for design and you notice details other people miss',c:'CR'},
+    {t:'You always see the bigger picture when everyone else is stuck in the details',c:'SR'},
+    {t:'You can get along with literally anyone and you remember everyone\'s name',c:'CN'},
+    {t:'You\'re the friend who always has receipts \u2014 you remember facts, stats, and patterns',c:'AN'},
+    {t:'You can explain anything in a way that just clicks \u2014 complex ideas become simple stories',c:'ST'},
+    {t:'You come up with ideas nobody else would think of \u2014 you\'re the wild card',c:'DS'}
+  ]},
+  // Q8: Order: DS, CN, AN, CR, SR, ST
+  {label:'The Crisis',text:'A brand you manage just went viral for the wrong reason. What\'s your instinct?',opts:[
+    {t:'"This is actually an opportunity to flip the narrative \u2014 let\'s do something unexpected"',c:'DS'},
+    {t:'"I\'m reaching out to our key community members and partners first \u2014 they\'ll help us"',c:'CN'},
+    {t:'"Before we react, let me look at the actual data \u2014 how many people saw this, and what\'s the real sentiment?"',c:'AN'},
+    {t:'"We need to respond, but the tone and visual of our response matters as much as the words"',c:'CR'},
+    {t:'"Let\'s assess the situation: what\'s the actual exposure, who\'s affected, and what are our options?"',c:'SR'},
+    {t:'"We need to tell our side of the story \u2014 authentically, not defensively"',c:'ST'}
+  ]},
+  // Q9: Order: SR, ST, DS, CR, AN, CN
+  {label:'The Learning Style',text:'You want to learn about a new marketing trend. You\'d rather:',opts:[
+    {t:'Take a structured online course with frameworks and models',c:'SR'},
+    {t:'Read a long-form case study or watch a brand documentary',c:'ST'},
+    {t:'Just try it yourself \u2014 launch something small, see what happens, learn from it',c:'DS'},
+    {t:'Follow the best creators doing it and study their craft visually',c:'CR'},
+    {t:'Find the research papers and industry reports behind the trend',c:'AN'},
+    {t:'Ask someone in the industry to mentor you over coffee',c:'CN'}
+  ]},
+  // Q10: Order: CN, DS, CR, ST, AN, SR
+  {label:'The Legacy',text:'In 10 years, you want to be known as someone who:',opts:[
+    {t:'Built a team and a culture that people love being part of',c:'CN'},
+    {t:'Did things differently \u2014 broke conventions and proved that new ways work',c:'DS'},
+    {t:'Created iconic work that people remember \u2014 campaigns, visuals, or experiences that became cultural moments',c:'CR'},
+    {t:'Changed how people think about a brand, a product, or even an industry through powerful storytelling',c:'ST'},
+    {t:'Made smarter decisions by seeing patterns nobody else could see in the data',c:'AN'},
+    {t:'Built a business or brand from strategy to scale \u2014 the architect behind the success',c:'SR'}
+  ]}
+];
+
+const KEYS = ['A','B','C','D','E','F'];
+
+// ===================== CONFIG =====================
+// Paste your Google Apps Script Web App URL here (see SETUP-GOOGLE-SHEETS.md)
+const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxpuZq6dxby2-uvICaB1K8gbJ9pD_qXTxnF6-N9BHXwyb0y6FyraQKygSysAVSf0FDuSQ/exec';
+
+// ===================== STATE =====================
+let cq=0, answers=new Array(10).fill(null), userName='', userEmail='';
+
+// ===================== SCREENS =====================
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+
+function startQuiz(){show('quiz');renderQ()}
+
+// ===================== QUIZ =====================
+function renderQ(){
+  const q=QS[cq];
+  document.getElementById('progBar').style.width=(cq/10*100)+'%';
+  document.getElementById('curQ').textContent=cq+1;
+  document.getElementById('qWrap').innerHTML=
+    `<div class="q-label">${q.label}</div>`+
+    `<div class="q-text">${q.text}</div>`+
+    `<div class="opts">${q.opts.map((o,i)=>`<button class="opt ${answers[cq]===o.c?'sel':''}" onclick="pick('${o.c}')"><span class="opt-key">${KEYS[i]}</span><span>${o.t}</span></button>`).join('')}</div>`+
+    `<div class="q-nav"><button class="btn-q" onclick="prev()" ${cq===0?'disabled':''}>&#8592; Back</button>`+
+    (cq===9
+      ?`<button class="btn-q pri" onclick="finish()" ${answers[cq]===null?'disabled':''}>See My Result &#8594;</button>`
+      :`<button class="btn-q pri" onclick="next()" ${answers[cq]===null?'disabled':''}>Next &#8594;</button>`)+
+    `</div>`;
+}
+
+function pick(c){answers[cq]=c;renderQ()}
+function next(){if(answers[cq]!==null&&cq<9){cq++;renderQ()}}
+function prev(){if(cq>0){cq--;renderQ()}}
+function finish(){if(answers[cq]===null)return;document.getElementById('progBar').style.width='100%';show('email-gate')}
+
+// ===================== SCORING =====================
+function calc(){
+  const ct={ST:0,SR:0,DS:0,CN:0,CR:0,AN:0};
+  answers.forEach(c=>{if(c)ct[c]++});
+  const sorted=Object.entries(ct).sort((a,b)=>b[1]-a[1]);
+  const pri=['ST','CN','SR','CR','DS','AN'];
+  const mx=sorted[0][1];
+  const tied=sorted.filter(([_,c])=>c===mx);
+  let primary=tied.length>1?pri.find(code=>tied.some(([c])=>c===code)):sorted[0][0];
+  let secondary=null;
+  const sb=sorted.find(([c])=>c!==primary);
+  if(sb&&sb[1]>=mx-2&&sb[1]>0)secondary=sb[0];
+  return{primary,secondary};
+}
+
+// ===================== RESULTS =====================
+function unlock(e){
+  e.preventDefault();
+  userName=document.getElementById('inName').value.trim();
+  userEmail=document.getElementById('inEmail').value.trim();
+  if(!userName||!userEmail)return;
+  const{primary,secondary}=calc();
+  renderRes(primary,secondary);
+  show('results');
+
+  // Send to Google Sheets (fire-and-forget via hidden image ping — most reliable, no CORS issues)
+  if(WEBHOOK_URL){
+    const a=ARCH[primary];
+    const params=new URLSearchParams({
+      name:userName,
+      email:userEmail,
+      archetype:a.name,
+      secondary:secondary?ARCH[secondary].name.replace('The ','')+' Edge':'',
+      traits:a.traits.join(', '),
+      source:'quiz'
+    });
+    const img=new Image();
+    img.src=WEBHOOK_URL+'?'+params.toString();
+  }
+}
+
+function renderRes(pc,sc){
+  const a=ARCH[pc];
+  const hero=document.getElementById('resHero');
+  hero.style.background=a.bg;hero.style.color=a.tx;
+  document.getElementById('resIcon').innerHTML=ICONS[pc];
+  document.getElementById('resGreeting').textContent=userName+', you are';
+  document.getElementById('resName').textContent=a.name.toUpperCase().replace('THE ','');
+  document.getElementById('resTagline').textContent='"'+a.tagline+'"';
+  if(sc){const s=ARCH[sc];const b=document.getElementById('comboBadge');b.style.display='inline-block';b.textContent='with a '+s.name.replace('The ','')+' Edge';}
+  document.getElementById('resTraits').innerHTML=a.traits.map(t=>`<span class="res-trait">${t}</span>`).join('');
+  document.getElementById('resDesc').textContent=a.desc;
+  document.getElementById('resCareers').innerHTML=a.careers.map(c=>`<li>${c}</li>`).join('');
+  document.getElementById('resFamous').innerHTML=a.famous.map(f=>'&bull; '+f).join('<br>');
+  document.getElementById('resFun').textContent='"'+a.fun+'"';
+  document.getElementById('resHookInline').textContent=a.hook;
+}
+
+// ===================== CARD DOWNLOAD (with name) =====================
+function downloadCard(){
+  const{primary}=calc();const a=ARCH[primary];
+  const cv=document.getElementById('card-canvas'),ctx=cv.getContext('2d');
+  cv.width=1080;cv.height=1920;
+
+  // Background
+  ctx.fillStyle=a.bg;ctx.fillRect(0,0,1080,1920);
+  const g=ctx.createRadialGradient(540,400,0,540,400,800);
+  g.addColorStop(0,'rgba(255,255,255,0.08)');g.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,1080,1920);
+
+  const tc=a.tx, ac=a.ac||a.tx;
+  ctx.textAlign='left';
+
+  // MarkProf
+  ctx.fillStyle=tc;ctx.globalAlpha=0.6;ctx.font='600 28px Inter,sans-serif';
+  ctx.fillText('MARKPROF',80,120);ctx.globalAlpha=1;
+
+  // Header
+  ctx.fillStyle=tc;ctx.globalAlpha=0.7;ctx.font='500 32px Inter,sans-serif';
+  ctx.fillText('What Kind of Marketer Are You?',80,200);ctx.globalAlpha=1;
+
+  // Divider
+  ctx.strokeStyle=tc;ctx.globalAlpha=0.2;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(80,260);ctx.lineTo(1000,260);ctx.stroke();ctx.globalAlpha=1;
+
+  // Draw icon via offscreen SVG rendering
+  drawIconOnCanvas(ctx,primary,tc,310);
+
+  // User name
+  ctx.fillStyle=ac;ctx.globalAlpha=0.9;ctx.font='600 36px Inter,sans-serif';
+  ctx.fillText(userName+', you are',80,490);ctx.globalAlpha=1;
+
+  // THE
+  ctx.fillStyle=tc;ctx.font='800 44px Inter,sans-serif';
+  ctx.fillText('THE',80,545);
+
+  // Archetype name
+  ctx.font='800 86px "Space Grotesk",Inter,sans-serif';
+  const dn=a.name.replace('The ','').toUpperCase();
+  ctx.fillText(dn,80,635);
+
+  // Tagline
+  ctx.fillStyle=tc;ctx.globalAlpha=0.85;ctx.font='italic 500 30px Inter,sans-serif';
+  wt(ctx,'"'+a.tagline+'"',80,700,920,42);ctx.globalAlpha=1;
+
+  // Traits
+  let y=810;
+  ctx.font='700 26px Inter,sans-serif';ctx.fillStyle=ac;
+  ctx.fillText(a.traits.join('  |  '),80,y);
+
+  // Description (shortened for card)
+  ctx.fillStyle=tc;ctx.globalAlpha=0.8;ctx.font='400 26px Inter,sans-serif';
+  const shortDesc=a.desc.split('. ').slice(0,3).join('. ')+'.';
+  y=wt(ctx,shortDesc,80,y+60,920,38);ctx.globalAlpha=1;
+
+  // Career paths label
+  y+=45;ctx.fillStyle=ac;ctx.globalAlpha=0.5;ctx.font='700 19px Inter,sans-serif';
+  ctx.fillText('YOUR MARKETING CAREER PATH',80,y);ctx.globalAlpha=1;
+  y+=8;ctx.fillStyle=tc;ctx.font='500 26px Inter,sans-serif';
+  a.careers.forEach(c=>{y+=38;ctx.fillText('\u2022  '+c,80,y)});
+
+  // MarkProf hook
+  y+=55;ctx.fillStyle=ac;ctx.globalAlpha=0.9;ctx.font='600 24px Inter,sans-serif';
+  wt(ctx,a.hook,80,y,920,34);ctx.globalAlpha=1;
+
+  // Bottom divider
+  ctx.strokeStyle=tc;ctx.globalAlpha=0.2;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(80,1700);ctx.lineTo(1000,1700);ctx.stroke();ctx.globalAlpha=1;
+
+  // CTA
+  ctx.fillStyle=tc;ctx.globalAlpha=0.7;ctx.font='600 28px Inter,sans-serif';ctx.textAlign='center';
+  ctx.fillText('Discover yours: markprof.org/quiz',540,1770);ctx.globalAlpha=1;
+
+  // Hashtags
+  ctx.fillStyle=tc;ctx.globalAlpha=0.4;ctx.font='500 22px Inter,sans-serif';
+  ctx.fillText('#WhatKindOfMarketer  #MarkProf  #MP23',540,1850);ctx.globalAlpha=1;
+
+  // Download
+  const link=document.createElement('a');
+  link.download='MarkProf-'+dn.replace(/\s+/g,'-')+'-Card.png';
+  link.href=cv.toDataURL('image/png');link.click();
+}
+
+function drawIconOnCanvas(ctx,code,color,yPos){
+  // Render SVG icon to canvas via Image
+  const svgStr=ICONS[code].replace(/currentColor/g,color);
+  const blob=new Blob([svgStr],{type:'image/svg+xml'});
+  const url=URL.createObjectURL(blob);
+  const img=new Image();
+  img.onload=function(){
+    // This is async but card already downloaded by then — we use sync fallback below
+    URL.revokeObjectURL(url);
+  };
+  img.src=url;
+  // Sync fallback: draw geometric shape per archetype
+  ctx.save();
+  ctx.translate(80,yPos);
+  ctx.scale(1.3,1.3);
+  ctx.fillStyle=color;ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';
+  if(code==='ST'){
+    // Book shape
+    ctx.globalAlpha=0.12;ctx.beginPath();ctx.moveTo(50,0);ctx.lineTo(10,20);ctx.lineTo(10,60);ctx.lineTo(50,40);ctx.lineTo(90,60);ctx.lineTo(90,20);ctx.closePath();ctx.fill();
+    ctx.globalAlpha=0.8;ctx.stroke();ctx.beginPath();ctx.moveTo(50,0);ctx.lineTo(50,40);ctx.stroke();
+  } else if(code==='SR'){
+    // Crown/chess
+    ctx.globalAlpha=0.12;ctx.beginPath();ctx.moveTo(20,65);ctx.lineTo(50,80);ctx.lineTo(80,65);ctx.lineTo(80,55);ctx.lineTo(50,70);ctx.lineTo(20,55);ctx.closePath();ctx.fill();
+    ctx.globalAlpha=0.8;ctx.beginPath();ctx.moveTo(20,55);ctx.lineTo(50,70);ctx.lineTo(80,55);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(50,70);ctx.lineTo(50,35);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(35,35);ctx.lineTo(65,35);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(38,35);ctx.lineTo(38,20);ctx.lineTo(50,30);ctx.lineTo(62,20);ctx.lineTo(62,35);ctx.stroke();
+  } else if(code==='DS'){
+    // Lightning bolt through cube
+    ctx.globalAlpha=0.08;ctx.beginPath();ctx.moveTo(50,15);ctx.lineTo(20,30);ctx.lineTo(20,60);ctx.lineTo(50,75);ctx.lineTo(80,60);ctx.lineTo(80,30);ctx.closePath();ctx.fill();
+    ctx.globalAlpha=0.8;ctx.stroke();
+    ctx.lineWidth=3.5;ctx.beginPath();ctx.moveTo(55,5);ctx.lineTo(42,38);ctx.lineTo(56,38);ctx.lineTo(40,72);ctx.stroke();
+  } else if(code==='CN'){
+    // Network nodes
+    ctx.globalAlpha=0.8;
+    [[50,35,10],[20,20,7],[80,20,7],[25,60,7],[75,60,7]].forEach(([cx,cy,r],i)=>{
+      ctx.globalAlpha=i===0?0.15:0.1;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
+      ctx.globalAlpha=0.8;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+    });
+    ctx.globalAlpha=0.35;ctx.lineWidth=1.5;
+    [[41,30,26,23],[59,30,74,23],[42,42,29,53],[58,42,71,53]].forEach(([x1,y1,x2,y2])=>{ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke()});
+  } else if(code==='CR'){
+    // Brush + diamond canvas
+    ctx.globalAlpha=0.1;ctx.beginPath();ctx.moveTo(50,10);ctx.lineTo(15,35);ctx.lineTo(50,60);ctx.lineTo(85,35);ctx.closePath();ctx.fill();
+    ctx.globalAlpha=0.8;ctx.stroke();
+    ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(72,12);ctx.lineTo(48,52);ctx.stroke();
+    ctx.globalAlpha=0.5;ctx.beginPath();ctx.moveTo(48,52);ctx.lineTo(44,60);ctx.quadraticCurveTo(42,64,46,62);ctx.lineTo(53,57);ctx.closePath();ctx.fill();
+  } else if(code==='AN'){
+    // Bar chart on platform
+    ctx.globalAlpha=0.8;ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(15,65);ctx.lineTo(50,80);ctx.lineTo(85,65);ctx.stroke();
+    ctx.globalAlpha=0.2;
+    [[28,35,10,25],[45,20,10,40],[62,30,10,30]].forEach(([x,y,w,h])=>{ctx.fillRect(x,y,w,h)});
+    ctx.globalAlpha=0.8;
+    [[28,35,10,25],[45,20,10,40],[62,30,10,30]].forEach(([x,y,w,h])=>{ctx.strokeRect(x,y,w,h)});
+    ctx.globalAlpha=0.5;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(25,38);ctx.lineTo(40,28);ctx.lineTo(55,33);ctx.lineTo(70,18);ctx.stroke();
+    ctx.globalAlpha=0.5;ctx.beginPath();ctx.arc(70,18,3,0,Math.PI*2);ctx.fill();
+  }
+  ctx.restore();
+}
+
+function wt(ctx,text,x,y,mw,lh){
+  const w=text.split(' ');let l='',cy=y;
+  for(let i=0;i<w.length;i++){
+    const tl=l+w[i]+' ';
+    if(ctx.measureText(tl).width>mw&&i>0){ctx.fillText(l.trim(),x,cy);l=w[i]+' ';cy+=lh}
+    else l=tl;
+  }
+  ctx.fillText(l.trim(),x,cy);return cy;
+}
+
+// ===================== SHARING =====================
+function shareIG(){downloadCard();alert('Card downloaded! Open Instagram, create a Story, and add your card image.')}
+function shareFB(){const{primary}=calc();const a=ARCH[primary];const t=encodeURIComponent('Apparently I\'m "'+a.name+'" \u2014 '+a.tagline+' Take the quiz: markprof.org/quiz');window.open('https://www.facebook.com/sharer/sharer.php?quote='+t,'_blank','width=600,height=400')}
+function shareTW(){const{primary}=calc();const a=ARCH[primary];const t=encodeURIComponent('I\'m '+a.name+': "'+a.tagline+'" What kind of marketer are you? markprof.org/quiz #MarkProf #MP23');window.open('https://twitter.com/intent/tweet?text='+t,'_blank','width=600,height=400')}
+function copyLink(){navigator.clipboard.writeText('https://markprof.org/quiz').then(()=>{event.target.textContent='Copied!';setTimeout(()=>{event.target.textContent='Copy Link'},2000)})}
+
+// ===================== RETAKE =====================
+function retake(){
+  cq=0;answers=new Array(10).fill(null);userName='';userEmail='';
+  document.getElementById('comboBadge').style.display='none';
+  show('welcome');
+}
+
+// ===================== KEYBOARD =====================
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('quiz').classList.contains('active'))return;
+  const km={a:0,b:1,c:2,d:3,e:4,f:5};const k=e.key.toLowerCase();
+  if(km[k]!==undefined)pick(QS[cq].opts[km[k]].c);
+  else if(e.key==='ArrowRight'||e.key==='Enter'){cq===9?finish():next()}
+  else if(e.key==='ArrowLeft')prev();
+});
+</script>
+</body>
+</html>

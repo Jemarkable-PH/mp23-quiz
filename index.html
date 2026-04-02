@@ -144,7 +144,20 @@ a{color:inherit}
 #card-canvas{display:none}
 
 /* RESPONSIVE */
-@media(max-width:640px){.welcome-meta{flex-direction:column;gap:0.5rem}.cta-cards{grid-template-columns:1fr}.share-btns{flex-direction:column;align-items:center}.q-wrap{padding:2rem 1.25rem 3rem}}
+@media(max-width:640px){
+.welcome-meta{flex-direction:column;gap:0.5rem}
+.cta-cards{grid-template-columns:1fr}
+.share-btns{flex-direction:column;align-items:center}
+.q-wrap{padding:4.5rem 1.25rem 1.5rem;min-height:auto!important}
+.q-text{font-size:1.1rem!important;margin-bottom:1rem!important}
+.opts{gap:0.4rem}
+.opt{padding:0.6rem 0.9rem;font-size:0.82rem;line-height:1.4;gap:0.6rem}
+.opt-key{width:22px;height:22px;min-width:22px;font-size:0.65rem}
+.q-nav{margin-top:1.25rem;padding-top:1rem}
+.quiz-status{padding-top:4rem}
+.e-row{grid-template-columns:1fr!important}
+.res-name{font-size:2.5rem!important}
+}
 </style>
 </head>
 <body>
@@ -245,6 +258,8 @@ a{color:inherit}
   <div class="share-bar">
     <h3>Share Your Result</h3>
     <p>Let your friends know what kind of marketer you are</p>
+    <canvas id="qr-display" width="174" height="174" style="margin:0 auto 1.25rem;display:block;border-radius:8px"></canvas>
+    <p style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-bottom:1.5rem">Scan or share the quiz link</p>
     <div class="share-btns">
       <button class="btn-sh" onclick="shareIG()">Instagram Story</button>
       <button class="btn-sh" onclick="shareFB()">Facebook</button>
@@ -252,6 +267,10 @@ a{color:inherit}
       <button class="btn-sh" onclick="copyLink()">Copy Link</button>
     </div>
     <button class="btn-dl" onclick="downloadCard()">&#11015; Download Your Archetype Card</button>
+    <div id="cardPreview" style="display:none;margin-top:1.5rem;text-align:center">
+      <p style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:0.75rem">Long-press the image below to save it</p>
+      <img id="cardImage" style="width:100%;max-width:360px;border-radius:12px;border:1px solid rgba(255,255,255,0.1)" alt="Your MarkProf Archetype Card">
+    </div>
   </div>
 
   <!-- PERSONALIZED CTA (shown based on pre-filter) -->
@@ -568,6 +587,9 @@ function renderRes(pc,sc){
   document.getElementById('resCareers').innerHTML=a.careers.map(c=>`<li>${c}</li>`).join('');
   document.getElementById('resFamous').innerHTML=a.famous.map(f=>'&bull; '+f).join('<br>');
   document.getElementById('resFun').textContent='"'+a.fun+'"';
+  // Render QR code on results page
+  var qc=document.getElementById('qr-display');
+  if(qc){var qctx=qc.getContext('2d');qc.width=174;qc.height=174;drawQR(qctx,12,12,150);}
 }
 
 // ===================== CARD DOWNLOAD (with name) =====================
@@ -637,15 +659,6 @@ function downloadCard(){
   y+=55;ctx.fillStyle=ac;ctx.globalAlpha=0.9;ctx.font='600 24px Inter,sans-serif';
   wt(ctx,a.hook,80,y,920,34);ctx.globalAlpha=1;
 
-  // QR code — upper right, black on white, 290px (10px/module), below IG story safe zone
-  var qrSize=290;
-  var qrX=1080-qrSize-60;  // 60px from right edge
-  var qrY=140;              // below story UI elements
-  drawQR(ctx,qrX,qrY,qrSize);
-  ctx.fillStyle=tc;ctx.globalAlpha=0.6;ctx.font='600 22px Inter,sans-serif';ctx.textAlign='center';
-  ctx.fillText('Scan to take the quiz!',qrX+qrSize/2,qrY+qrSize+50);
-  ctx.textAlign='left';ctx.globalAlpha=1;
-
   // Bottom CTA
   ctx.strokeStyle=tc;ctx.globalAlpha=0.15;ctx.lineWidth=2;
   ctx.beginPath();ctx.moveTo(80,1720);ctx.lineTo(1000,1720);ctx.stroke();ctx.globalAlpha=1;
@@ -655,10 +668,34 @@ function downloadCard(){
   ctx.fillText('MarkProf MP23',540,1840);
   ctx.textAlign='left';ctx.globalAlpha=1;
 
-  // Download
-  const link=document.createElement('a');
-  link.download='MarkProf-'+dn.replace(/\s+/g,'-')+'-Card.png';
-  link.href=cv.toDataURL('image/png');link.click();
+  // QR code — drawn LAST to ensure it's on top of everything
+  ctx.save();
+  ctx.globalAlpha=1;
+  ctx.globalCompositeOperation='source-over';
+  var qrSize=290;
+  var qrX=1080-qrSize-60;
+  var qrY=140;
+  drawQR(ctx,qrX,qrY,qrSize);
+  ctx.restore();
+  ctx.fillStyle=tc;ctx.globalAlpha=0.6;ctx.font='600 22px Inter,sans-serif';ctx.textAlign='center';
+  ctx.fillText('Scan to take the quiz!',qrX+qrSize/2,qrY+qrSize+50);
+  ctx.textAlign='left';ctx.globalAlpha=1;
+
+  // Download — detect mobile and show image for long-press save
+  var isMobile=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  var dataUrl=cv.toDataURL('image/png');
+  if(isMobile){
+    var preview=document.getElementById('cardPreview');
+    var img=document.getElementById('cardImage');
+    img.src=dataUrl;
+    preview.style.display='block';
+    preview.scrollIntoView({behavior:'smooth',block:'center'});
+  }else{
+    var link=document.createElement('a');
+    link.download='MarkProf-'+dn.replace(/\s+/g,'-')+'-Card.png';
+    link.href=dataUrl;
+    link.click();
+  }
 }
 
 function drawIconOnCanvas(ctx,code,color,yPos){

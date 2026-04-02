@@ -44,11 +44,11 @@ a{color:inherit}
 .quiz-progress{position:fixed;top:57px;left:0;height:3px;background:linear-gradient(90deg,#FF6B6B,#7B2FBE);transition:width 0.4s cubic-bezier(0.4,0,0.2,1);z-index:100;border-radius:0 2px 2px 0}
 .quiz-status{text-align:center;padding:5rem 2rem 0;font-size:0.8rem;font-weight:600;color:rgba(255,255,255,0.4)}
 .quiz-status span{color:#FFF}
-.q-wrap{width:100%;max-width:680px;padding:2rem 2rem 4rem;margin:0 auto}
+.q-wrap{width:100%;max-width:680px;padding:2rem 2rem 2rem;margin:0 auto;min-height:calc(100vh - 90px);display:flex;flex-direction:column;justify-content:center}
 .q-label{font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem}
-.q-text{font-size:clamp(1.3rem,3.5vw,1.75rem);font-weight:700;line-height:1.35;margin-bottom:2rem}
-.opts{display:flex;flex-direction:column;gap:0.65rem}
-.opt{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.25rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;color:#FFF;font-family:'Inter',sans-serif;font-size:0.92rem;line-height:1.5;text-align:left;cursor:pointer;width:100%;transition:all 0.2s}
+.q-text{font-size:clamp(1.2rem,3vw,1.5rem);font-weight:700;line-height:1.3;margin-bottom:1.25rem}
+.opts{display:flex;flex-direction:column;gap:0.5rem}
+.opt{display:flex;align-items:flex-start;gap:0.8rem;padding:0.75rem 1.1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#FFF;font-family:'Inter',sans-serif;font-size:0.88rem;line-height:1.45;text-align:left;cursor:pointer;width:100%;transition:all 0.2s}
 .opt:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);transform:translateX(4px)}
 .opt.sel{background:rgba(123,47,190,0.15);border-color:rgba(123,47,190,0.5)}
 .opt-key{display:flex;align-items:center;justify-content:center;width:26px;height:26px;min-width:26px;border-radius:8px;background:rgba(255,255,255,0.1);font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.5);margin-top:2px}
@@ -65,7 +65,15 @@ a{color:inherit}
 .lock-icon{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 2rem}
 #email-gate h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,5vw,2.5rem);font-weight:700;margin-bottom:0.6rem}
 #email-gate .sub{color:rgba(255,255,255,0.5);margin-bottom:2.5rem}
-.e-form{display:flex;flex-direction:column;gap:0.8rem;width:100%;max-width:380px}
+.e-form{display:flex;flex-direction:column;gap:0.8rem;width:100%;max-width:440px}
+.e-row{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.e-label{display:block;font-size:0.72rem;font-weight:600;color:rgba(255,255,255,0.45);margin-bottom:0.3rem;text-align:left}
+.e-label .req{color:#FF6B6B}
+.e-select{padding:0.9rem 1.2rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#FFF;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;width:100%;appearance:none;cursor:pointer;transition:border-color 0.2s}
+.e-select:focus{border-color:rgba(123,47,190,0.6)}
+.e-select option{background:#1a1a1a}
+.e-conditional{margin-top:0.4rem;display:none}
+.e-conditional.show{display:flex;flex-direction:column;gap:0.6rem}
 .e-in{padding:0.9rem 1.2rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#FFF;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.2s}
 .e-in::placeholder{color:rgba(255,255,255,0.3)}
 .e-in:focus{border-color:rgba(123,47,190,0.6)}
@@ -104,8 +112,8 @@ a{color:inherit}
 .share-btns{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.25rem}
 .btn-sh{padding:0.6rem 1.3rem;border-radius:100px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#FFF;font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s}
 .btn-sh:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3)}
-.btn-dl{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2rem;background:#FFF;color:#0A0A0A;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s}
-.btn-dl:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,0.2)}
+.btn-dl{display:inline-flex;align-items:center;gap:0.6rem;padding:1.1rem 2.5rem;background:linear-gradient(135deg,#7B2FBE,#FF6B6B);color:#FFF;font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:700;border:none;border-radius:100px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 20px rgba(123,47,190,0.3)}
+.btn-dl:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(123,47,190,0.5)}
 
 /* CTA SECTION */
 .cta-section{padding:4rem 2rem;background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.06)}
@@ -142,7 +150,7 @@ a{color:inherit}
 <body>
 
 <nav class="nav">
-  <a href="https://markprof.org" class="nav-logo" target="_blank">MarkProf</a>
+  <a href="#" class="nav-logo" onclick="retake();return false">MarkProf</a>
   <div class="nav-right">
     <a href="https://markprof.org" target="_blank">markprof.org</a>
   </div>
@@ -169,12 +177,50 @@ a{color:inherit}
 <div id="email-gate" class="screen">
   <div class="lock-icon">&#127919;</div>
   <h2>Your result is ready!</h2>
-  <p class="sub">Enter your name and email to unlock your Marketer Archetype card.</p>
-  <form class="e-form" onsubmit="unlock(event)">
-    <input type="text" class="e-in" id="inName" placeholder="Your first name" required>
-    <input type="email" class="e-in" id="inEmail" placeholder="Your email address" required>
-    <button type="submit" class="btn-unlock">Unlock My Result</button>
-  </form>
+  <p class="sub">Tell us a bit about yourself to unlock your Marketer Archetype card.</p>
+  <div class="e-form">
+    <div class="e-row">
+      <div><label class="e-label">First Name <span class="req">*</span></label><input type="text" class="e-in" id="inFirstName" placeholder="Juan" required></div>
+      <div><label class="e-label">Last Name <span class="req">*</span></label><input type="text" class="e-in" id="inLastName" placeholder="Dela Cruz" required></div>
+    </div>
+    <div><label class="e-label">Email <span class="req">*</span></label><input type="text" class="e-in" id="inEmail" placeholder="juan@email.com" style="width:100%"></div>
+    <div><label class="e-label">I am a... <span class="req">*</span></label>
+      <select class="e-select" id="inStatus" onchange="toggleGateFields()" required>
+        <option value="" disabled selected>Select one</option>
+        <option value="grad">University student &mdash; graduating (2027)</option>
+        <option value="penul">University student &mdash; penultimate (2028)</option>
+        <option value="early">University student &mdash; Year 1 or 2 (2029+)</option>
+        <option value="working">Working professional</option>
+        <option value="alumni">MarkProf Alumnus/Alumna</option>
+        <option value="prof">Professor / Academic</option>
+        <option value="parent">Parent / Supporter</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <!-- Conditional: University students (grad/penul) -->
+    <div class="e-conditional" id="gateUniFields">
+      <div class="e-row">
+        <div><label class="e-label">University <span class="req">*</span></label><input type="text" class="e-in" id="inUni" placeholder="e.g., UP Diliman"></div>
+        <div><label class="e-label">Degree Program <span class="req">*</span></label><input type="text" class="e-in" id="inDegree" placeholder="e.g., BS Marketing"></div>
+      </div>
+    </div>
+    <!-- Conditional: Early university students -->
+    <div class="e-conditional" id="gateEarlyFields">
+      <div class="e-row">
+        <div><label class="e-label">University</label><input type="text" class="e-in" id="inUniEarly" placeholder="e.g., Ateneo de Manila"></div>
+        <div><label class="e-label">Expected Graduation</label>
+          <select class="e-select" id="inGradEarly"><option value="" disabled selected>Year</option><option>2029</option><option>2030</option><option>2031</option><option>2032+</option></select>
+        </div>
+      </div>
+    </div>
+    <!-- Conditional: Alumni -->
+    <div class="e-conditional" id="gateAlumniFields">
+      <div><label class="e-label">Batch Number</label>
+        <select class="e-select" id="inBatch"><option value="" selected>Select batch</option><option>MP1</option><option>MP2</option><option>MP3</option><option>MP4</option><option>MP5</option><option>MP6</option><option>MP7</option><option>MP8</option><option>MP9</option><option>MP10</option><option>MP11</option><option>MP12</option><option>MP13</option><option>MP14</option><option>MP15</option><option>MP16</option><option>MP17</option><option>MP18</option><option>MP19</option><option>MP20</option><option>MP21</option><option>MP22</option></select>
+      </div>
+    </div>
+    <button class="btn-unlock" type="button" onclick="unlock()">Unlock My Result</button>
+  </div>
   <p class="e-privacy">We'll never spam you. Your data stays with MarkProf.</p>
 </div>
 
@@ -194,11 +240,7 @@ a{color:inherit}
     <div class="res-sec"><div class="res-lbl">Your Marketing Career Path</div><ul class="res-careers" id="resCareers"></ul></div>
     <div class="res-sec"><div class="res-lbl">Famous Marketers Like You</div><p class="res-famous" id="resFamous"></p></div>
     <div class="res-sec"><div class="res-funfact" id="resFun"></div></div>
-    <div class="res-sec" style="text-align:center;padding:1.5rem;background:linear-gradient(135deg,rgba(255,107,107,0.08),rgba(123,47,190,0.08));border:1px solid rgba(255,255,255,0.1);border-radius:16px">
-      <p style="font-size:1.05rem;font-weight:700;margin-bottom:0.5rem">Ready to turn this into a career?</p>
-      <p style="font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:1.25rem">MarkProf MP23 is a free, two-week marketing bootcamp with the Philippines' top CMOs. <span id="resHookInline" style="color:rgba(255,255,255,0.75)"></span></p>
-      <a href="https://markprof.org/apply" target="_blank" style="display:inline-block;padding:0.75rem 2rem;background:#FF6B6B;color:#FFF;font-family:Inter,sans-serif;font-size:0.9rem;font-weight:700;border-radius:100px;text-decoration:none;transition:transform 0.2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Apply for MP23</a>
-    </div>
+    <div class="res-sec" id="resInlineCTA" style="text-align:center;padding:1.5rem;background:linear-gradient(135deg,rgba(255,107,107,0.08),rgba(123,47,190,0.08));border:1px solid rgba(255,255,255,0.1);border-radius:16px"></div>
   </div>
   <div class="share-bar">
     <h3>Share Your Result</h3>
@@ -212,38 +254,41 @@ a{color:inherit}
     <button class="btn-dl" onclick="downloadCard()">&#11015; Download Your Archetype Card</button>
   </div>
 
-  <!-- ACTION ITEMS / CTAs -->
-  <div class="cta-section">
-    <h3>What's your next step?</h3>
-    <p>Your marketing journey continues here.</p>
-    <div class="cta-cards">
-      <div class="cta-card t1">
-        <h4>Apply for MP23</h4>
-        <p>Graduating in 2027 or 2028? Join the Philippines' premier marketing bootcamp. Completely free.</p>
-        <a href="https://markprof.org/apply" target="_blank" class="btn-cta primary">Apply Now</a>
-      </div>
-      <div class="cta-card t2">
-        <h4>Not Yet Eligible?</h4>
-        <p>Still in college? Get first access to MP24 and monthly marketing career content.</p>
-        <a href="https://markprof.org/waitlist" target="_blank" class="btn-cta secondary">Join MP24 Waitlist</a>
-      </div>
-      <div class="cta-card t3">
-        <h4>Support MarkProf</h4>
-        <p>Alumni, professional, professor, or parent? Help us find the next generation of marketers.</p>
-        <a href="https://markprof.org/support" target="_blank" class="btn-cta secondary">Become a Supporter</a>
-      </div>
-    </div>
-  </div>
+  <!-- PERSONALIZED CTA (shown based on pre-filter) -->
+  <div class="cta-section" id="ctaSection"></div>
 
   <footer class="footer">
     <div class="footer-links">
       <a href="https://markprof.org/about" target="_blank">About MarkProf</a>
       <a href="https://markprof.org/faq" target="_blank">FAQ</a>
-      <a href="https://markprof.org/contact" target="_blank">Contact</a>
+      <a href="mailto:info@markprof.com">Contact</a>
       <a href="https://markprof.org" target="_blank">markprof.org</a>
     </div>
-    <p class="footer-copy">&copy; 2026 MarkProf Foundation. All rights reserved.</p>
-    <p style="margin-top:1rem"><button onclick="retake()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.4);font-family:Inter,sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.5rem;border-radius:100px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='#FFF'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.4)'">Retake the Quiz</button></p>
+    <p style="margin-top:1.5rem"><button onclick="retake()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.4);font-family:Inter,sans-serif;font-size:0.8rem;font-weight:600;padding:0.5rem 1.5rem;border-radius:100px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='#FFF'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.4)'">Retake the Quiz</button></p>
+
+    <!-- Subtle partnership CTAs -->
+    <div style="max-width:700px;margin:2.5rem auto 0;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.04)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;text-align:left">
+        <div>
+          <p style="font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem">Student Organizations</p>
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.2);line-height:1.5;margin-bottom:0.4rem">Want to bring MarkProf to your campus? Host a roadshow in your province.</p>
+          <a href="mailto:info@markprof.com?subject=Bring%20MarkProf%20to%20%5BYour%20University%5D%20%E2%80%94%20Roadshow%20Partnership" style="font-size:0.7rem;color:rgba(255,255,255,0.3);transition:color 0.2s" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Email us &rarr;</a>
+        </div>
+        <div>
+          <p style="font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem">Knowledge Partners</p>
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.2);line-height:1.5;margin-bottom:0.4rem">Marketing leader or company? Join MP23 as a Knowledge Partner.</p>
+          <a href="mailto:info@markprof.com?subject=MP23%20Knowledge%20Partner%20Inquiry%20%E2%80%94%20%5BYour%20Company%2FName%5D" style="font-size:0.7rem;color:rgba(255,255,255,0.3);transition:color 0.2s" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Email us &rarr;</a>
+        </div>
+        <div>
+          <p style="font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem">Professors &amp; Deans</p>
+          <p style="font-size:0.7rem;color:rgba(255,255,255,0.2);line-height:1.5;margin-bottom:0.4rem">Know students who would thrive at MarkProf? Nominate them directly.</p>
+          <a href="mailto:info@markprof.com?subject=MP23%20Student%20Nomination%20%E2%80%94%20%5BUniversity%20Name%5D" style="font-size:0.7rem;color:rgba(255,255,255,0.3);transition:color 0.2s" onmouseover="this.style.color='#FFF'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Email us &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-copy" style="margin-top:2rem">&copy; 2026 MarkProf Foundation. All rights reserved.</p>
+    <p style="margin-top:1.5rem"><a href="mailto:jemar.luczon.ph@gmail.com?subject=MP23%20Quiz%20%E2%80%94%20Website%20Issue" style="font-size:0.6rem;color:rgba(255,255,255,0.1);text-decoration:none;transition:color 0.2s" onmouseover="this.style.color='rgba(255,255,255,0.3)'" onmouseout="this.style.color='rgba(255,255,255,0.1)'">Report an issue</a></p>
   </footer>
 </div>
 
@@ -269,9 +314,9 @@ const ICONS = {
 
 const ARCH = {
   ST:{name:'The Storyteller',tagline:'You don\'t sell products \u2014 you make people feel something.',traits:['Intuitive','Emotional','Compelling'],desc:'You have a rare gift: you make people care. In a world drowning in content, you\'re the one who cuts through the noise with stories that stick. The brands that win aren\'t the loudest \u2014 they\'re the ones with the best storytellers. At MarkProf, you\'ll learn to channel this instinct into campaigns that move millions, mentored by the marketers behind the Philippines\' most iconic brand stories.',careers:['Brand Management','Copywriting & Content Strategy','Communications & PR'],famous:['The team behind Jollibee\'s viral "Vow" campaign','Nike\'s "Just Do It" \u2014 storytelling at its purest'],fun:'You\'re the friend who can make a 5-minute story about buying milk sound like a Netflix special.',hook:'MarkProf Storytellers go on to lead brand teams at companies like Unilever, P&G, and the country\'s most creative agencies.',bg:'#FF6B6B',tx:'#FFF5E1',ac:'#FFF5E1'},
-  SR:{name:'The Strategist',tagline:'You see the chessboard when everyone else sees checkers.',traits:['Analytical','Visionary','Structured'],desc:'You don\'t just have ideas \u2014 you have plans that actually work. Companies pay millions for the kind of thinking that comes naturally to you: seeing the big picture, connecting the dots, and building the roadmap from insight to execution. At MarkProf, you\'ll sharpen that strategic mind alongside CMOs who\'ve launched brands across Southeast Asia \u2014 and you\'ll build the network to fast-track your career.',careers:['Marketing Strategy & Planning','Management Consulting','Business Development'],famous:['P&G\'s brand management system \u2014 strategy built an empire','The team that turned Potato Corner into a global franchise'],fun:'You probably have a spreadsheet for your personal goals and you\'re not even embarrassed about it.',hook:'MarkProf Strategists have gone on to consulting firms, brand leadership roles, and founded their own companies.',bg:'#1B2A4A',tx:'#E8E8E8',ac:'#E8E8E8'},
-  DS:{name:'The Disruptor',tagline:'Rules exist so you know exactly what to break.',traits:['Bold','Original','Fearless'],desc:'While everyone else plays it safe, you\'re already three steps ahead with an idea nobody saw coming. The marketing industry doesn\'t need more people who follow templates \u2014 it needs originals like you who rewrite the rules entirely. At MarkProf, you\'ll be surrounded by the Philippines\' boldest marketing leaders who\'ll push your ideas further than you thought possible, and give you the frameworks to make wild ideas actually land.',careers:['Innovation & New Product Development','Startup Marketing / Growth Hacking','Creative Direction'],famous:['The Angkas team who turned regulatory battles into a beloved brand','Liquid Death \u2014 turning water into a punk rock brand'],fun:'Your org mates either love your ideas or are terrified by them. Usually both.',hook:'MarkProf Disruptors launch startups, lead innovation teams, and become the creative forces brands fight to hire.',bg:'#7B2FBE',tx:'#FFFFFF',ac:'#39FF14'},
-  CN:{name:'The Connector',tagline:'You don\'t build brands \u2014 you build communities.',traits:['Empathetic','Relational','Trustworthy'],desc:'In an age of algorithms, you bet on something more powerful: real human connection. You\'re the person who turns strangers into collaborators and customers into evangelists. That\'s not just a soft skill \u2014 it\'s the single most valuable capability in modern marketing. At MarkProf, you\'ll build relationships with 1,000+ alumni and the country\'s top marketing executives \u2014 a network that compounds for the rest of your career.',careers:['Sales & Trade Marketing','Community Management','Key Account Management','Customer Experience'],famous:['PICKUP COFFEE \u2014 built a brand through community, not ads','The MarkProf alumni network itself \u2014 connections that compound'],fun:'You know the name of your sari-sari store tita AND her kids\' birthdays.',hook:'MarkProf Connectors build the partnerships, teams, and communities that become the backbone of great brands.',bg:'#008080',tx:'#FFFFFF',ac:'#FFD700'},
+  SR:{name:'The Strategist',tagline:'You see the chessboard when everyone else sees checkers.',traits:['Analytical','Visionary','Structured'],desc:'You don\'t just have ideas \u2014 you have plans that actually work. Companies pay millions for the kind of thinking that comes naturally to you: seeing the big picture, connecting the dots, and building the roadmap from insight to execution. At MarkProf, you\'ll sharpen that strategic mind alongside top business executives who\'ve launched brands across Southeast Asia \u2014 and you\'ll build the network to fast-track your career.',careers:['Marketing Strategy & Planning','Management Consulting','Business Development'],famous:['P&G\'s brand management system \u2014 strategy built an empire','The team that turned Potato Corner into a global franchise'],fun:'You probably have a spreadsheet for your personal goals and you\'re not even embarrassed about it.',hook:'MarkProf Strategists have gone on to consulting firms, brand leadership roles, and founded their own companies.',bg:'#1B2A4A',tx:'#E8E8E8',ac:'#E8E8E8'},
+  DS:{name:'The Disruptor',tagline:'Rules exist so you know exactly what to break.',traits:['Bold','Original','Fearless'],desc:'While everyone else plays it safe, you\'re already three steps ahead with an idea nobody saw coming. The marketing industry doesn\'t need more people who follow templates \u2014 it needs originals like you who rewrite the rules entirely. At MarkProf, you\'ll be surrounded by the Philippines\' boldest business executives who\'ll push your ideas further than you thought possible, and give you the frameworks to make wild ideas actually land.',careers:['Innovation & New Product Development','Startup Marketing / Growth Hacking','Creative Direction'],famous:['The Angkas team who turned regulatory battles into a beloved brand','Liquid Death \u2014 turning water into a punk rock brand'],fun:'Your org mates either love your ideas or are terrified by them. Usually both.',hook:'MarkProf Disruptors launch startups, lead innovation teams, and become the creative forces brands fight to hire.',bg:'#7B2FBE',tx:'#FFFFFF',ac:'#39FF14'},
+  CN:{name:'The Connector',tagline:'You don\'t build brands \u2014 you build communities.',traits:['Empathetic','Relational','Trustworthy'],desc:'In an age of algorithms, you bet on something more powerful: real human connection. You\'re the person who turns strangers into collaborators and customers into evangelists. That\'s not just a soft skill \u2014 it\'s the single most valuable capability in modern marketing. At MarkProf, you\'ll build relationships with 1,000+ alumni and the country\'s top business executives \u2014 a network that compounds for the rest of your career.',careers:['Sales & Trade Marketing','Community Management','Key Account Management','Customer Experience'],famous:['PICKUP COFFEE \u2014 built a brand through community, not ads','The MarkProf alumni network itself \u2014 connections that compound'],fun:'You know the name of your sari-sari store tita AND her kids\' birthdays.',hook:'MarkProf Connectors build the partnerships, teams, and communities that become the backbone of great brands.',bg:'#008080',tx:'#FFFFFF',ac:'#FFD700'},
   CR:{name:'The Creator',tagline:'The world is your canvas and the brief is optional.',traits:['Visual','Imaginative','Expressive'],desc:'You see what others miss \u2014 the perfect color, the right frame, the detail that elevates good to unforgettable. Brands are desperate for people who can make them look and feel extraordinary. At MarkProf, you\'ll work alongside creative directors and brand builders who\'ve shaped the visual identities of the Philippines\' biggest companies \u2014 and you\'ll learn how to turn your creative instincts into a career that actually pays.',careers:['Creative / Art Direction','Digital & Social Media Marketing','Brand Design & Packaging','Content Creation'],famous:['Sunnies Studios \u2014 aesthetic IS strategy','The creatives behind Coca-Cola\'s timeless visual identity'],fun:'You\'ve redesigned your Canva resume at least 4 times this semester.',hook:'MarkProf Creators lead agency teams, define brand aesthetics, and build the visual worlds people fall in love with.',bg:'#FF1493',tx:'#1A1A1A',ac:'#FFFDD0'},
   AN:{name:'The Analyst',tagline:'Behind every great campaign is someone who read the data.',traits:['Precise','Curious','Evidence-driven'],desc:'While everyone else goes with their gut, you go with the evidence \u2014 and you\'re almost always right. In today\'s marketing, data literacy isn\'t optional \u2014 it\'s the superpower that separates good marketers from great ones. At MarkProf, you\'ll learn how the country\'s leading brands turn consumer insights into winning strategies, and you\'ll gain the business acumen to pair your analytical mind with real-world impact.',careers:['Consumer Insights & Market Research','Marketing Analytics & Data Science','Performance Marketing / Digital Advertising','Revenue Management'],famous:['Netflix\'s recommendation algorithm team \u2014 data IS the product','Google Ads \u2014 where every click is measured'],fun:'You\'ve Googled "pivot table tutorial" more than once and you\'re proud of it.',hook:'MarkProf Analysts become the insight leaders and performance marketers that every modern brand needs.',bg:'#1B4332',tx:'#FFFFFF',ac:'#95D5B2'}
 };
@@ -374,10 +419,10 @@ const KEYS = ['A','B','C','D','E','F'];
 
 // ===================== CONFIG =====================
 // Paste your Google Apps Script Web App URL here (see SETUP-GOOGLE-SHEETS.md)
-const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxpuZq6dxby2-uvICaB1K8gbJ9pD_qXTxnF6-N9BHXwyb0y6FyraQKygSysAVSf0FDuSQ/exec';
+const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyU0aN2r--Xh-W7L46h0aawjxJRwvvcqSKmNLcbrxnE9qIhlfPc-S02KftyIYHgr2YwdA/exec';
 
 // ===================== STATE =====================
-let cq=0, answers=new Array(10).fill(null), userName='', userEmail='';
+let cq=0, answers=new Array(10).fill(null), userFirst='', userLast='', userEmail='';
 
 // ===================== SCREENS =====================
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
@@ -421,28 +466,91 @@ function calc(){
 }
 
 // ===================== RESULTS =====================
-function unlock(e){
-  e.preventDefault();
-  userName=document.getElementById('inName').value.trim();
-  userEmail=document.getElementById('inEmail').value.trim();
-  if(!userName||!userEmail)return;
+// Toggle conditional fields in email gate
+function toggleGateFields(){
+  const v=document.getElementById('inStatus').value;
+  document.getElementById('gateUniFields').className='e-conditional'+(v==='grad'||v==='penul'?' show':'');
+  document.getElementById('gateEarlyFields').className='e-conditional'+(v==='early'?' show':'');
+  document.getElementById('gateAlumniFields').className='e-conditional'+(v==='alumni'?' show':'');
+}
+
+function unlock(){
+  var fn=document.getElementById('inFirstName');
+  var ln=document.getElementById('inLastName');
+  var em=document.getElementById('inEmail');
+  var st=document.getElementById('inStatus');
+  userFirst=fn?fn.value.trim():'';
+  userLast=ln?ln.value.trim():'';
+  userEmail=em?em.value.trim():'';
+  const status=st?st.value:'';
+  if(!userFirst||!userLast||!userEmail||!status)return;
+
   const{primary,secondary}=calc();
   renderRes(primary,secondary);
+  renderCTA(status);
   show('results');
 
-  // Send to Google Sheets (fire-and-forget via hidden image ping — most reliable, no CORS issues)
+  // Send to Google Sheets — Quiz Results tab
   if(WEBHOOK_URL){
     const a=ARCH[primary];
-    const params=new URLSearchParams({
-      name:userName,
-      email:userEmail,
+    const p=new URLSearchParams({
+      firstName:userFirst,lastName:userLast,email:userEmail,
+      status:status,
+      university:document.getElementById('inUni')?.value||document.getElementById('inUniEarly')?.value||'',
+      degree:document.getElementById('inDegree')?.value||'',
+      gradYear:document.getElementById('inStatus').value==='early'?(document.getElementById('inGradEarly')?.value||''):(status==='grad'?'2027':status==='penul'?'2028':''),
       archetype:a.name,
       secondary:secondary?ARCH[secondary].name.replace('The ','')+' Edge':'',
       traits:a.traits.join(', '),
       source:'quiz'
     });
-    const img=new Image();
-    img.src=WEBHOOK_URL+'?'+params.toString();
+    new Image().src=WEBHOOK_URL+'?'+p.toString();
+
+    // Also send to the appropriate waitlist/supporter tab
+    let src2='';
+    const p2=new URLSearchParams({firstName:userFirst,lastName:userLast,email:userEmail,archetype:a.name});
+    if(status==='grad'||status==='penul'){
+      src2='signup-mp23';
+      p2.set('university',document.getElementById('inUni')?.value||'');
+      p2.set('degree',document.getElementById('inDegree')?.value||'');
+      p2.set('gradYear',status==='grad'?'2027':'2028');
+    }else if(status==='early'){
+      src2='signup-mp24';
+      p2.set('university',document.getElementById('inUniEarly')?.value||'');
+      p2.set('gradYear',document.getElementById('inGradEarly')?.value||'');
+    }else{
+      src2='signup-supporter';
+      p2.set('supporterType',status==='alumni'?'Alumni ('+( document.getElementById('inBatch')?.value||'')+')':(status==='prof'?'Professor':status==='working'?'Professional':status==='parent'?'Parent/Supporter':'Other'));
+    }
+    p2.set('source',src2);
+    new Image().src=WEBHOOK_URL+'?'+p2.toString();
+  }
+}
+
+// Render personalized CTA based on user's status
+function renderCTA(status){
+  const el=document.getElementById('ctaSection');
+  const inl=document.getElementById('resInlineCTA');
+  const shareBtn='<div style="margin-top:1.5rem;display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap"><button onclick="copyLink()" style="padding:0.6rem 1.5rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:100px;color:#FFF;font-family:Inter,sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer">Copy Quiz Link</button><button onclick="shareFB()" style="padding:0.6rem 1.5rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:100px;color:#FFF;font-family:Inter,sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer">Share on Facebook</button></div>';
+  const a=ARCH[calc().primary];
+
+  if(status==='grad'||status==='penul'){
+    // Inline CTA: MP23 waitlist + FB group
+    inl.innerHTML='<p style="font-size:1.05rem;font-weight:700;margin-bottom:0.5rem">Ready to turn this into a career?</p><p style="font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:1.25rem">MarkProf MP23 is a free, 8-Saturday bootcamp where the Philippines\' top business executives personally train the next generation of marketing leaders. Recruitment closes Q3 2026. Bootcamp runs Q4 2026 through Q1 2027. <span style="color:rgba(255,255,255,0.75)">'+a.hook+'</span></p><a href="https://www.facebook.com/share/g/17CnqpDzoc/" target="_blank" style="display:inline-block;padding:0.75rem 2rem;background:#FF6B6B;color:#FFF;font-family:Inter,sans-serif;font-size:0.9rem;font-weight:700;border-radius:100px;text-decoration:none;transition:transform 0.2s" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'\'">Join the MP23 Waitlist</a>';
+    // Bottom CTA
+    el.innerHTML='<h3>You\'re on the MP23 Waitlist!</h3><p>We\'ve saved your details. Join the official Facebook group to connect with fellow MP23 aspirants:</p><a href="https://www.facebook.com/share/g/17CnqpDzoc/" target="_blank" style="display:inline-block;margin:1rem 0;padding:0.7rem 1.8rem;background:#1877F2;color:#FFF;font-family:Inter,sans-serif;font-size:0.88rem;font-weight:700;border-radius:100px;text-decoration:none">Join &ldquo;Manifesting MarkProf Batch 23&rdquo;</a><p style="margin-top:0.5rem;font-size:0.9rem;color:rgba(255,255,255,0.5)">The 8-Saturday bootcamp runs Q4 2026 through Q1 2027. Share the quiz with classmates who should apply too.</p>'+shareBtn;
+
+  }else if(status==='early'){
+    // Inline CTA: MP24 future marketer
+    inl.innerHTML='<p style="font-size:1.05rem;font-weight:700;margin-bottom:0.5rem">Your time is coming.</p><p style="font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:1.25rem">You\'re not eligible for MP23 yet, but MP24 is yours. We\'ll notify you the moment applications open. In the meantime, <span style="color:rgba(255,255,255,0.75)">'+a.hook+'</span></p><p style="font-size:0.85rem;color:rgba(255,255,255,0.4)">Know someone graduating in 2027 or 2028? Share this quiz with them!</p>';
+    // Bottom CTA
+    el.innerHTML='<h3>Welcome, Future Marketer!</h3><p>You\'ll be the first to know when MP24 opens. We\'ll send you marketing career insights in the meantime.</p><p style="margin-top:1rem;font-size:0.9rem;color:rgba(255,255,255,0.5)">Share the quiz with friends \u2014 especially those graduating in 2027 or 2028!</p>'+shareBtn;
+
+  }else{
+    // Inline CTA: Supporters — share focused, no waitlist
+    inl.innerHTML='<p style="font-size:1.05rem;font-weight:700;margin-bottom:0.5rem">Help us find the next generation.</p><p style="font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.6;margin-bottom:1.25rem">MarkProf MP23 is a free, 8-Saturday bootcamp for graduating and penultimate college students. Know someone who should join? Every share could reach the next great Filipino marketer.</p><button onclick="copyLink()" style="padding:0.7rem 1.8rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:100px;color:#FFF;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background=\'rgba(255,255,255,0.15)\'" onmouseout="this.style.background=\'rgba(255,255,255,0.1)\'">Copy Quiz Link to Share</button>';
+    // Bottom CTA
+    el.innerHTML='<h3>Thank You for Supporting MarkProf!</h3><p>Share the quiz with students you know \u2014 every share could reach the next great Filipino marketer.</p>'+shareBtn;
   }
 }
 
@@ -451,7 +559,7 @@ function renderRes(pc,sc){
   const hero=document.getElementById('resHero');
   hero.style.background=a.bg;hero.style.color=a.tx;
   document.getElementById('resIcon').innerHTML=ICONS[pc];
-  document.getElementById('resGreeting').textContent=userName+', you are';
+  document.getElementById('resGreeting').textContent=userFirst+', you are';
   document.getElementById('resName').textContent=a.name.toUpperCase().replace('THE ','');
   document.getElementById('resTagline').textContent='"'+a.tagline+'"';
   if(sc){const s=ARCH[sc];const b=document.getElementById('comboBadge');b.style.display='inline-block';b.textContent='with a '+s.name.replace('The ','')+' Edge';}
@@ -460,7 +568,6 @@ function renderRes(pc,sc){
   document.getElementById('resCareers').innerHTML=a.careers.map(c=>`<li>${c}</li>`).join('');
   document.getElementById('resFamous').innerHTML=a.famous.map(f=>'&bull; '+f).join('<br>');
   document.getElementById('resFun').textContent='"'+a.fun+'"';
-  document.getElementById('resHookInline').textContent=a.hook;
 }
 
 // ===================== CARD DOWNLOAD (with name) =====================
@@ -493,9 +600,9 @@ function downloadCard(){
   // Draw icon via offscreen SVG rendering
   drawIconOnCanvas(ctx,primary,tc,310);
 
-  // User name
+  // User name (first name only on card)
   ctx.fillStyle=ac;ctx.globalAlpha=0.9;ctx.font='600 36px Inter,sans-serif';
-  ctx.fillText(userName+', you are',80,490);ctx.globalAlpha=1;
+  ctx.fillText(userFirst+', you are',80,490);ctx.globalAlpha=1;
 
   // THE
   ctx.fillStyle=tc;ctx.font='800 44px Inter,sans-serif';
@@ -530,17 +637,23 @@ function downloadCard(){
   y+=55;ctx.fillStyle=ac;ctx.globalAlpha=0.9;ctx.font='600 24px Inter,sans-serif';
   wt(ctx,a.hook,80,y,920,34);ctx.globalAlpha=1;
 
-  // Bottom divider
-  ctx.strokeStyle=tc;ctx.globalAlpha=0.2;ctx.lineWidth=2;
-  ctx.beginPath();ctx.moveTo(80,1700);ctx.lineTo(1000,1700);ctx.stroke();ctx.globalAlpha=1;
+  // QR code — upper right, black on white, 290px (10px/module), below IG story safe zone
+  var qrSize=290;
+  var qrX=1080-qrSize-60;  // 60px from right edge
+  var qrY=140;              // below story UI elements
+  drawQR(ctx,qrX,qrY,qrSize);
+  ctx.fillStyle=tc;ctx.globalAlpha=0.6;ctx.font='600 22px Inter,sans-serif';ctx.textAlign='center';
+  ctx.fillText('Scan to take the quiz!',qrX+qrSize/2,qrY+qrSize+50);
+  ctx.textAlign='left';ctx.globalAlpha=1;
 
-  // CTA
-  ctx.fillStyle=tc;ctx.globalAlpha=0.7;ctx.font='600 28px Inter,sans-serif';ctx.textAlign='center';
-  ctx.fillText('Discover yours: markprof.org/quiz',540,1770);ctx.globalAlpha=1;
-
-  // Hashtags
-  ctx.fillStyle=tc;ctx.globalAlpha=0.4;ctx.font='500 22px Inter,sans-serif';
-  ctx.fillText('#WhatKindOfMarketer  #MarkProf  #MP23',540,1850);ctx.globalAlpha=1;
+  // Bottom CTA
+  ctx.strokeStyle=tc;ctx.globalAlpha=0.15;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(80,1720);ctx.lineTo(1000,1720);ctx.stroke();ctx.globalAlpha=1;
+  ctx.fillStyle=tc;ctx.globalAlpha=0.6;ctx.font='600 26px Inter,sans-serif';ctx.textAlign='center';
+  ctx.fillText('Discover yours: jemarkable-ph.github.io/mp23-quiz',540,1790);
+  ctx.fillStyle=tc;ctx.globalAlpha=0.3;ctx.font='500 20px Inter,sans-serif';
+  ctx.fillText('MarkProf MP23',540,1840);
+  ctx.textAlign='left';ctx.globalAlpha=1;
 
   // Download
   const link=document.createElement('a');
@@ -620,14 +733,59 @@ function wt(ctx,text,x,y,mw,lh){
 
 // ===================== SHARING =====================
 function shareIG(){downloadCard();alert('Card downloaded! Open Instagram, create a Story, and add your card image.')}
-function shareFB(){const{primary}=calc();const a=ARCH[primary];const t=encodeURIComponent('Apparently I\'m "'+a.name+'" \u2014 '+a.tagline+' Take the quiz: markprof.org/quiz');window.open('https://www.facebook.com/sharer/sharer.php?quote='+t,'_blank','width=600,height=400')}
-function shareTW(){const{primary}=calc();const a=ARCH[primary];const t=encodeURIComponent('I\'m '+a.name+': "'+a.tagline+'" What kind of marketer are you? markprof.org/quiz #MarkProf #MP23');window.open('https://twitter.com/intent/tweet?text='+t,'_blank','width=600,height=400')}
-function copyLink(){navigator.clipboard.writeText('https://markprof.org/quiz').then(()=>{event.target.textContent='Copied!';setTimeout(()=>{event.target.textContent='Copy Link'},2000)})}
+function shareFB(){const{primary}=calc();const a=ARCH[primary];const quizUrl='https://jemarkable-ph.github.io/mp23-quiz/';const t=encodeURIComponent('I just took the MarkProf Archetype Quiz and I\'m "'+a.name+'" \u2014 '+a.tagline+'\n\nFind out what kind of marketer YOU are. It only takes 3 minutes:\n'+quizUrl+'\n\nMarkProf MP23 is a free, 8-Saturday bootcamp where the Philippines\' top business executives train the next generation of marketing leaders. If you\'re graduating in 2027 or 2028, you should apply!');window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(quizUrl)+'&quote='+t,'_blank','width=600,height=400')}
+function shareTW(){const{primary}=calc();const a=ARCH[primary];const quizUrl='https://jemarkable-ph.github.io/mp23-quiz/';const t=encodeURIComponent('I\'m '+a.name+': "'+a.tagline+'" \n\nWhat kind of marketer are you? Take the quiz:');window.open('https://twitter.com/intent/tweet?text='+t+'&url='+encodeURIComponent(quizUrl),'_blank','width=600,height=400')}
+function copyLink(){navigator.clipboard.writeText('https://jemarkable-ph.github.io/mp23-quiz/').then(()=>{event.target.textContent='Copied!';setTimeout(()=>{event.target.textContent='Copy Link'},2000)})}
+
+// ===================== QR CODE (minimal generator for URL) =====================
+// Generates a QR code on canvas — simplified version 1 encoding
+function drawQR(ctx,x,y,size){
+  const modules=generateQRMatrix();
+  const n=modules.length;
+  // Use integer cell size for crisp pixels (10px per module = 290px for 29 modules)
+  const cell=Math.floor(size/n);
+  const actual=cell*n;
+  const pad=cell*2; // 2-module quiet zone (QR spec minimum)
+  // White background
+  ctx.globalAlpha=1;
+  ctx.fillStyle='#FFFFFF';
+  ctx.fillRect(x-pad,y-pad,actual+pad*2,actual+pad*2);
+  // Black modules — pixel-aligned, no anti-aliasing gaps
+  ctx.fillStyle='#000000';
+  for(let r=0;r<n;r++){
+    for(let c=0;c<n;c++){
+      if(modules[r][c]){
+        ctx.fillRect(x+c*cell,y+r*cell,cell,cell);
+      }
+    }
+  }
+}
+
+// Minimal QR encoder — Version 2 (25x25), byte mode, ECC L
+function generateQRMatrix(){
+  // Pre-computed QR Code Version 3 (29x29) for: https://jemarkable-ph.github.io/mp23-quiz/
+  // QR Code for https://jemarkable-ph.github.io/mp23-quiz/ — Error Correction M (more scannable)
+  const d='1111111011001100001110111111110000010101000001010101000001101110100100111110101010111011011101010101111110100101110110111010010100010001101011101100000100000010010010010000011111111010101010101010111111100000000111010010110100000000101101110111101001100010010110101000110101010000110111000101001110101000000110100000110010101010111011010010000000011110101000010111110010000110000011101100011111001001000111000101101011010000011001001110110010110011011101010110001011100111101101010011110111010000000000101001100100001011101011011001011101100011011010000101001110000111110010000100011101110101000111111111111000000000011111100001010001111111111110110111001001101011010100000101011111100001000110001011101001101000011011111011110111010101001111000110111001101110101001111001101001001011000001000101101001011000101011111110100110010011101110010';
+  const sz=29;
+  const m=[];
+  for(let r=0;r<sz;r++){
+    m[r]=[];
+    for(let c=0;c<sz;c++){
+      m[r][c]=d[r*sz+c]==='1'?1:0;
+    }
+  }
+  return m;
+}
 
 // ===================== RETAKE =====================
 function retake(){
-  cq=0;answers=new Array(10).fill(null);userName='';userEmail='';
+  cq=0;answers=new Array(10).fill(null);userFirst='';userLast='';userEmail='';
   document.getElementById('comboBadge').style.display='none';
+  // Reset gate form
+  const st=document.getElementById('inStatus');if(st)st.value='';
+  ['gateUniFields','gateEarlyFields','gateAlumniFields'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.className='e-conditional';
+  });
   show('welcome');
 }
 
